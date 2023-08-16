@@ -7,9 +7,25 @@ class CaixaDaLanchonete {
   valorDoPedido = 0.0;
 
   vetorResultado = [];
-  vetorFormasDePagamento = ["dinheiro", "debito", "credito"];  
+  vetorFormasDePagamento = ["dinheiro", "debito", "credito"];
 
   constructor() {}
+
+  validaItemExtraSemPrincipal(vetorResultado) {
+    // condição não pode ter o item extra do café (chantily) sem comprar um café
+    // condição não pode ter o item extra do sanduiche (queijo) sem comprar um sanduiche
+    var extraSemPrincial = false;
+
+    if (
+      (vetorResultado.includes(objetoItensCardapio.chantily) === true &&
+        vetorResultado.includes(objetoItensCardapio.cafe) === false) ||
+      (vetorResultado.includes(objetoItensCardapio.queijo) === true &&
+        vetorResultado.includes(objetoItensCardapio.sanduiche) === false)
+    ) {
+      extraSemPrincial = true;
+    }
+    return extraSemPrincial;
+  }
 
   calculaValorFinalPedido(formaDePagamento) {
     // calcula os totais de acordo com a forma de pagamento
@@ -60,17 +76,7 @@ class CaixaDaLanchonete {
         this.valorDoPedido + codigoItem.preco * this.quantidadeItem;
     } // fecha o laço for
 
-    // condição não pode ter o item extra do café (chantily) sem comprar um café
-    // condição não pode ter o item extra do sanduiche (queijo) sem comprar um sanduiche
-    if (
-      (this.vetorResultado.includes(objetoItensCardapio.chantily) ===
-        true &&
-        this.vetorResultado.includes(objetoItensCardapio.cafe) ===
-          false) ||
-      (this.vetorResultado.includes(objetoItensCardapio.queijo) === true &&
-        this.vetorResultado.includes(objetoItensCardapio.sanduiche) ===
-          false)
-    ) {
+    if (this.validaItemExtraSemPrincipal(this.vetorResultado) === true) {
       return "Item extra não pode ser pedido sem o principal";
     }
 
