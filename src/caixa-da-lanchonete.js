@@ -1,3 +1,5 @@
+import { objetoItensCardapio } from "./cardapio.js";
+
 class CaixaDaLanchonete {
   itemQuantidade = 0;
   taxaAcrescimo = 0.03;
@@ -5,50 +7,7 @@ class CaixaDaLanchonete {
   valorDoPedido = 0.0;
 
   vetorResultado = [];
-  vetorFormasDePagamento = ["dinheiro", "debito", "credito"];
-
-  objetoItensCardapio = {
-    cafe: {
-      codigo: "cafe",
-      preco: 3.0,
-      descricao: "Café",
-    },
-    chantily: {
-      codigo: "chantily",
-      preco: 1.5,
-      descricao: "Chantily (extra do Café)",
-    },
-    suco: {
-      codigo: "suco",
-      preco: 6.2,
-      descricao: "Suco Natural",
-    },
-    sanduiche: {
-      codigo: "sanduiche",
-      preco: 6.5,
-      descricao: "Sanduíche",
-    },
-    queijo: {
-      codigo: "queijo",
-      preco: 2.0,
-      descricao: "Queijo (extra do Sanduíche)",
-    },
-    salgado: {
-      codigo: "salgado",
-      preco: 7.25,
-      descricao: "Salgado",
-    },
-    combo1: {
-      codigo: "combo1",
-      preco: 9.5,
-      descricao: "1 Suco e 1 Sanduíche",
-    },
-    combo2: {
-      codigo: "combo2",
-      preco: 7.5,
-      descricao: "1 Café e 1 Sanduíche",
-    },
-  };
+  vetorFormasDePagamento = ["dinheiro", "debito", "credito"];  
 
   constructor() {}
 
@@ -85,7 +44,7 @@ class CaixaDaLanchonete {
     for (let i = 0; i < itens.length; i++) {
       // converte a string separa por virgulas em vetor, index zero = codigoItem, index um = quantidadeItem
       let vetorItensPedido = itens[i].split(",");
-      let codigoItem = this.objetoItensCardapio[vetorItensPedido[0]];
+      let codigoItem = objetoItensCardapio[vetorItensPedido[0]];
       this.quantidadeItem = parseInt(vetorItensPedido[1], 10);
 
       if (codigoItem === undefined) {
@@ -104,12 +63,12 @@ class CaixaDaLanchonete {
     // condição não pode ter o item extra do café (chantily) sem comprar um café
     // condição não pode ter o item extra do sanduiche (queijo) sem comprar um sanduiche
     if (
-      (this.vetorResultado.includes(this.objetoItensCardapio.chantily) ===
+      (this.vetorResultado.includes(objetoItensCardapio.chantily) ===
         true &&
-        this.vetorResultado.includes(this.objetoItensCardapio.cafe) ===
+        this.vetorResultado.includes(objetoItensCardapio.cafe) ===
           false) ||
-      (this.vetorResultado.includes(this.objetoItensCardapio.queijo) === true &&
-        this.vetorResultado.includes(this.objetoItensCardapio.sanduiche) ===
+      (this.vetorResultado.includes(objetoItensCardapio.queijo) === true &&
+        this.vetorResultado.includes(objetoItensCardapio.sanduiche) ===
           false)
     ) {
       return "Item extra não pode ser pedido sem o principal";
