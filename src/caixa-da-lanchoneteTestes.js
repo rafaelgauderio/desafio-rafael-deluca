@@ -14,6 +14,9 @@ console.log(
   new CaixaDaLanchonete().calcularValorDaCompra("debito", ["cafe,0"])
 );
 
+console.log("\n\tInformando item que não tem no menu");
+console.log(new CaixaDaLanchonete().calcularValorDaCompra("debito",["passoca,1"]));
+
 console.log("\n\tItens unitários no débito");
 console.log(
   new CaixaDaLanchonete().calcularValorDaCompra("debito", ["cafe,1"])
@@ -61,6 +64,13 @@ console.log(
     "cafe,2",
   ])
 ); // 15,96
+
+console.log(
+    new CaixaDaLanchonete().calcularValorDaCompra("debito", [
+      "combo2,1",
+      "cafe,10",
+    ])
+  ); // 37,50
 
 console.log("\n\tPedidos com item extra e sem o item principal");
 console.log(
