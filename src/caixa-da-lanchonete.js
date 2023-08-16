@@ -2,8 +2,8 @@ import { objetoItensCardapio } from "./cardapio.js";
 
 class CaixaDaLanchonete {
   itemQuantidade = 0;
-  taxaAcrescimo = 0.03;
-  taxaDesconto = 0.05;
+  taxaCredito = 0.03;
+  taxaDinheiro = 0.05;
   valorDoPedido = 0.0;
 
   vetorResultado = [];
@@ -14,7 +14,7 @@ class CaixaDaLanchonete {
   validaItemExtraSemPrincipal(vetorResultado) {
     // condição não pode ter o item extra do café (chantily) sem comprar um café
     // condição não pode ter o item extra do sanduiche (queijo) sem comprar um sanduiche
-    var extraSemPrincial = false;
+    let extraSemPrincial = false;
 
     if (
       (vetorResultado.includes(objetoItensCardapio.chantily) === true &&
@@ -31,10 +31,10 @@ class CaixaDaLanchonete {
     // calcula os totais de acordo com a forma de pagamento
     if (formaDePagamento === "dinheiro") {
       this.valorDoPedido =
-        this.valorDoPedido - this.valorDoPedido * this.taxaDesconto;
+        this.valorDoPedido - this.valorDoPedido * this.taxaDinheiro;
     } else if (formaDePagamento === "credito") {
       this.valorDoPedido =
-        this.valorDoPedido + this.valorDoPedido * this.taxaAcrescimo;
+        this.valorDoPedido + this.valorDoPedido * this.taxaCredito;
     } else if (formaDePagamento === "debito") {
       this.valorDoPedido = this.valorDoPedido;
     }
